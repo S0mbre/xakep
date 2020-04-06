@@ -1,0 +1,41 @@
+/* Самые маленькие обложки для выпусков 200 - 205 */
+/*
+select xkissues.nissue, xkissues.title, min(xkcovers.cover_width) as min_width, xkcovers.cover_url
+from xkcovers
+inner join xkissues on xkissues.id_iss = xkcovers.id_iss2
+where (xkcovers.cover_width > 0) and (xkissues.nissue between 200 and 205)
+group by xkissues.nissue;
+*/  
+
+/* Найти статьи с категорией ВЗЛОМ */
+/*
+select xkissues.nissue, xkissues.title, xkcontent.art_cat, xkcontent.art_lev1, xkcontent.art_lev2, xkcontent.art_desc
+from xkcontent
+inner join xkissues on xkissues.id_iss = xkcontent.id_iss3
+where xkcontent.art_cat regexp 'ВЗЛОМ|Взлом|взлом';
+*/
+
+/* Найти статьи со словом "linux" */
+/*
+select xkissues.nissue, xkissues.title, xkcontent.art_cat, xkcontent.art_lev1, xkcontent.art_lev2, xkcontent.art_desc
+from xkcontent
+inner join xkissues on xkissues.id_iss = xkcontent.id_iss3
+where upper(xkcontent.art_lev1) like '%LINUX%' or upper(xkcontent.art_lev2) like '%LINUX%';
+*/
+
+/* Самый ранний выпуск со словом "Android" */
+/*
+select min(xkissues.nissue) as min_issue, xkissues.title, xkcontent.art_cat, xkcontent.art_lev1, xkcontent.art_lev2, xkcontent.art_desc
+from xkcontent
+inner join xkissues on xkissues.id_iss = xkcontent.id_iss3
+where upper(xkcontent.art_lev1) like '%ANDROID%' or upper(xkcontent.art_lev2) like '%ANDROID%';
+*/
+
+/* Найти статьи по использованию сервисов Amazon */
+/*
+select xkissues.*, xkcontent.*
+from xkcontent
+inner join xkissues on xkissues.id_iss = xkcontent.id_iss3
+where upper(xkcontent.art_lev1) like '%AMAZON%' or upper(xkcontent.art_lev2) like '%AMAZON%' or upper(xkcontent.art_desc) like '%AMAZON%'
+order by xkissues.nissue desc; 
+*/
